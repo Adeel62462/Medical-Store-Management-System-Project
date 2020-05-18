@@ -1,0 +1,7 @@
+Project Title: Medical Store Management System
+
+Group Members:
+	Muhammad Moeen	BCSF17M049 
+	Marsad Ghanvi	BCSF17M031
+	Adeel Babar	BCSF17M044
+			BCSF16M010

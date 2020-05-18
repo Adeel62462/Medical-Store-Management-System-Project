@@ -1,0 +1,34 @@
+Database name:	medicalstore
+
+Tables:		company, employee, employeeData, medicine, price, sale
+
+Queries:
+	=> create table company (id int auto_increment primary key, name varchar(100), 
+	   phone varchar(15), email varchar(100));
+	
+	=> create table employee (id int auto_increment primary key, username varchar(30), 
+	   password varchar(20), dataId int unique, constraint employee_dataId_fk foreign key(dataId) 
+	   references employeeData(id));
+
+	=> create table employeeData (id int auto_increment primary key, name varchar(50), 
+	   fatherName varchar(50), cnic varchar(15), phone varchar(15),address varchar(100));
+	
+	=> create table price (id int auto_increment primary key, costPrice double(7,2), 
+	   salePrice double(7,2), amount int);	
+
+	=> create table medicine (id int auto_increment primary key, name varchar(30), 
+	   companyId int, priceId int unique, constraint medicine_companyId_fk foreign key(companyId) 
+	   references company(id), constraint medicine_priceId_fk foreign key(priceId) 
+	   references price(id));
+	
+	=> create table sale (id int auto_increment primary key, customerName varchar(50), 
+	   phone varchar(15), saleDate date, total double(7,2));
+	
+
+Views:	medicine_view
+
+Queries:
+	=>create view medicine_view (id,name,costPrice,salePrice,amount,companyName,phone, 
+	email) as select m.id, m.name, p.costPrice, p.salePrice, p.amount, c.name, c.phone,
+	c.email from medicine m, price p, company c where m.priceId = p.id 
+	and m.companyId = c.id;	
